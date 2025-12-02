@@ -1,0 +1,57 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 4, 12, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.dialog {
+  background: rgba(10, 12, 28, 0.95);
+  border-radius: 18px;
+  padding: 28px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #e9edff;
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.message {
+  color: #c4c9f0;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cancel {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cdd2ff;
+}
+
+.confirm {
+  background: linear-gradient(90deg, #ff6b6b, #f45c43);
+  color: #fff;
+}
+

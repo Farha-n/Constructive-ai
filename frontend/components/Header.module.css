@@ -1,0 +1,55 @@
+.header {
+  background: rgba(5, 5, 16, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #e7ebff;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  object-fit: cover;
+}
+
+.name {
+  font-size: 0.95rem;
+  color: #c9cff8;
+}
+
+.logout {
+  padding: 8px 18px;
+  background: linear-gradient(90deg, #ff6b6b, #f45c43);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.logout:hover {
+  transform: translateY(-2px);
+}
+

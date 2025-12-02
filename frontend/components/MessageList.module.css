@@ -1,0 +1,77 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  animation: fadeIn 0.3s ease-in;
+  color: #dfe4ff;
+}
+
+.user {
+  align-self: flex-end;
+}
+
+.assistant {
+  align-self: flex-start;
+}
+
+.content {
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e7ebff;
+  line-height: 1.55;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.user .content {
+  background: linear-gradient(135deg, #4f6dff, #7b57ff);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+  border: none;
+}
+
+.assistant .content {
+  border-bottom-left-radius: 6px;
+}
+
+.error .content {
+  background: rgba(255, 94, 94, 0.12);
+  color: #ffb5b5;
+  border: 1px solid rgba(255, 94, 94, 0.3);
+}
+
+.content p {
+  margin: 4px 0;
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: #9aa2d4;
+  margin-top: 4px;
+}
+
+.user .timestamp {
+  text-align: right;
+}
+
+.assistant .timestamp {
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

@@ -1,0 +1,88 @@
+.wrapper {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #e7ebff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h3 {
+  margin: 0;
+  color: #ffdf8a;
+}
+
+.dismiss {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #ffdf8a;
+}
+
+.details {
+  background: rgba(8, 11, 30, 0.9);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.9rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 8px;
+  column-gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.label {
+  font-weight: 600;
+  color: #9aa2d9;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  resize: vertical;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e7ebff;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancel {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cfd5ff;
+}
+
+.send {
+  background: linear-gradient(90deg, #4f6dff, #7b57ff);
+  color: #fff;
+}
+
+.send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

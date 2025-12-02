@@ -1,0 +1,51 @@
+.wrapper {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 18px 22px;
+  background: rgba(5, 7, 20, 0.85);
+}
+
+.form {
+  display: flex;
+  gap: 12px;
+}
+
+.textarea {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e7ebff;
+  resize: none;
+  min-height: 48px;
+  max-height: 140px;
+  font-size: 0.95rem;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #6b7bff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.button {
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #4f6dff, #7b57ff);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 90px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
