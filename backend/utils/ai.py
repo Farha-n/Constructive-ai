@@ -194,3 +194,50 @@ Keep it concise and actionable:"""
             logger.error(f"Error generating digest: {e}")
             return "Unable to generate digest at this time."
 
+    def generate_grouped_summary(self, emails: List[Dict]) -> str:
+        """Group emails into categories (Work, Promotions, Personal, Urgent) and summarize each group."""
+        try:
+            emails_summary = "\n\n".join([
+                f"ID: {email.get('id', '')}\n"
+                f"From: {email.get('sender_email', 'unknown')}\n"
+                f"Subject: {email.get('subject', '')}\n"
+                f"Preview: {email.get('snippet', '')}"
+                for email in emails
+            ])
+
+            prompt = f"""You are helping a user triage their inbox.
+
+Here are some recent emails:
+
+{emails_summary}
+
+1. Group these emails into the following categories based on sender, subject, and preview:
+   - Work
+   - Promotions
+   - Personal
+   - Urgent
+2. For each category, provide:
+   - A short title line with the category name and number of emails
+   - 2–4 bullet points summarizing the most important emails (reference subjects, not IDs)
+3. If a category has no emails, omit it entirely.
+4. Answer in clear markdown.
+"""
+
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": "You are an email assistant that categorizes and summarizes emails."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=500,
+                temperature=0.4
+            )
+
+            content = response.choices[0].message.content or ""
+            summary = content.strip()
+            logger.info("Generated grouped summary")
+            return summary
+        except Exception as e:
+            logger.error(f"Error generating grouped summary: {e}")
+            return "Unable to generate grouped summary at this time."
+

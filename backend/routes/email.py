@@ -108,8 +108,9 @@ async def delete_email(request: DeleteEmailRequest, token: str):
                 status_code=403,
                 detail=(
                     "Google rejected the request because the Gmail API scopes were not granted. "
-                    "Remove the app from https://myaccount.google.com/permissions and sign in again "
-                    "after ensuring the Gmail API is enabled for your Google Cloud project."
+                    "Make sure the Gmail API is enabled in your Google Cloud project, then remove the "
+                    "app from https://myaccount.google.com/permissions and sign in again so the app "
+                    "can request full Gmail access (including the https://mail.google.com/ scope)."
                 )
             )
         raise HTTPException(status_code=e.resp.status, detail=e._get_reason())

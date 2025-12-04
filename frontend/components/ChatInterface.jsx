@@ -159,7 +159,12 @@ export default function ChatInterface({ token, initialGreeting }) {
               <EmailList
                 emails={emailContext}
                 onReply={(email) => handleSendMessage(`Reply to ${email.sender_email}`)}
-                onDelete={(email) => handleSendMessage(`Delete the email from ${email.sender_email}`)}
+                onDelete={(email) => setDeleteConfirm({
+                  id: email.id,
+                  sender_name: email.sender_name,
+                  sender_email: email.sender_email,
+                  subject: email.subject,
+                })}
               />
             )}
             <div ref={messagesEndRef} className={styles.scrollSentinel} />

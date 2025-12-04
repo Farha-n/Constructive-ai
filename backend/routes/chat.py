@@ -58,6 +58,12 @@ async def process_chat_message(request: ChatRequest, token: str):
         parameters = command_result.get("parameters", {})
         confidence = command_result.get("confidence", "low")
         
+        # Heuristic fix: if AI chose "digest" but the user clearly asked for specific recent emails,
+        # treat it as a "read" request instead.
+        if intent == "digest":
+            if ("last" in user_message) or ("recent" in user_message) or re.search(r"\b\d+\b", user_message):
+                intent = "read"
+        
         response_data = {
             "intent": intent,
             "confidence": confidence,
@@ -77,18 +83,22 @@ async def process_chat_message(request: ChatRequest, token: str):
             
             emails = gmail_service.get_recent_emails(max_results=max_results)
             
-            # Generate summaries
-            for email in emails:
-                try:
-                    summary = get_ai_service().generate_summary(
-                        email['body'],
-                        email['subject'],
-                        email['sender_name']
-                    )
-                    email['ai_summary'] = summary
-                except Exception as e:
-                    logger.error(f"Error generating summary: {e}")
-                    email['ai_summary'] = "Unable to generate summary."
+            # Generate summaries, but avoid hammering the LLM when user asks for many emails
+            if max_results <= 10:
+                for email in emails:
+                    try:
+                        summary = get_ai_service().generate_summary(
+                            email['body'],
+                            email['subject'],
+                            email['sender_name']
+                        )
+                        email['ai_summary'] = summary
+                    except Exception as e:
+                        logger.error(f"Error generating summary: {e}")
+                        email['ai_summary'] = "Unable to generate summary."
+            else:
+                for email in emails:
+                    email['ai_summary'] = "Summary omitted for this large list. Ask for a daily digest if you want an overview."
             
             response_data["message"] = f"I found {len(emails)} recent emails. Here they are:"
             response_data["action"] = "display_emails"
@@ -184,11 +194,11 @@ async def process_chat_message(request: ChatRequest, token: str):
                 response_data["action"] = "error"
         
         elif intent == "digest" or _has_keyword(user_message, ["digest", "summary"]):
-            # Generate daily digest
+            # Generate grouped digest for more than 5 emails (e.g., last 20)
             emails = gmail_service.get_recent_emails(max_results=20)
-            digest = get_ai_service().generate_daily_digest(emails)
+            digest = get_ai_service().generate_grouped_summary(emails)
             
-            response_data["message"] = "Here's your daily email digest:"
+            response_data["message"] = "Here's your grouped email summary:"
             response_data["action"] = "display_digest"
             response_data["data"] = {"digest": digest, "email_count": len(emails)}
         
